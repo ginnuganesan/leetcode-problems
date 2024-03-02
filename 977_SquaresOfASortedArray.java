@@ -24,6 +24,8 @@ nums is sorted in non-decreasing order.
 
 */
 
+//Solution
+
 class Solution {
     public int[] sortedSquares(int[] nums) {
         int[] out = new int[nums.length];
