@@ -48,6 +48,8 @@ The number of nodes in the list is in the range [1, 5000].
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+
+//Solution 1
 class Solution {
     public ListNode insertGreatestCommonDivisors(ListNode head) {
         if(head != null && head.next == null) {
@@ -77,5 +79,45 @@ class Solution {
             }
         }
         return gcd;
+    }
+}
+
+//Optimized Solution
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+        if(head != null && head.next == null) {
+            return head;
+        }
+        ListNode curr = head;
+        ListNode prev = null;
+        while(curr != null) {
+            if(curr != head) {
+                int gcd = gcd(prev.val, curr.val);
+                ListNode gcdNode = new ListNode(gcd);
+                gcdNode.next = curr;
+                prev.next = gcdNode;
+            }
+            prev = curr;
+            curr = curr.next;
+        }
+        return head;
+    }
+
+    public int gcd(int num1, int num2) {
+        if(num2 == 0) {
+            return num1;
+        }
+        return gcd(num2, num1 % num2);
     }
 }
