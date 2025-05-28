@@ -29,7 +29,7 @@ It can be shown we cannot convert 3 to 4 in less than 3 steps. Hence, we return 
 
 Constraints:
 
-0 <= start, goal <= 109
+0 <= start, goal <= 10^9
 
 */
 
@@ -72,5 +72,20 @@ class Solution {
         }
         sb.append(num == 0 ? 0 : 1);
         return sb.reverse().toString();
+    }
+}
+
+//Optimal Solution
+
+class Solution {
+    public int minBitFlips(int start, int goal) {
+        int res = start ^ goal;
+        int count = 0;
+        while (res > 1) {
+            count += res & 1; //res % 2 == 1 -> to check odd/even
+            res = res >> 1; // res / 2^1
+        }
+        count += res;
+        return count;
     }
 }
