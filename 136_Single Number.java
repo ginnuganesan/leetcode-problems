@@ -49,3 +49,16 @@ class Solution {
         return out;
     }
 }
+
+//Optimal solution
+
+class Solution {
+    public int singleNumber(int[] nums) {
+        int xor = 0;
+        for (int num: nums) {
+            xor ^= num; // 2 ^ 2 = 0 or 3 ^ 3 = 0 so these will become 0 
+                        // and only single element prevails
+        }
+        return xor;
+    }
+}
