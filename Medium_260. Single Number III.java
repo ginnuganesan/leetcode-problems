@@ -23,8 +23,8 @@ Output: [1,0]
 
 Constraints:
 
-2 <= nums.length <= 3 * 104
--231 <= nums[i] <= 231 - 1
+2 <= nums.length <= 3 * 10^4
+-2^31 <= nums[i] <= 2^31 - 1
 Each integer in nums will appear twice, only two integers will appear once.
 
 */
@@ -53,5 +53,29 @@ class Solution {
             }
         }
         return out;
+    }
+}
+
+//Optimal solution [Bit Manipulation]
+
+class Solution {
+    public int[] singleNumber(int[] nums) {
+        if (nums.length == 2) {
+            return nums;
+        }
+        int xor = 0;
+        for (int num: nums) {
+            xor ^= num;
+        }
+        int rightmostSetBit = (xor & xor-1) ^ xor;
+        int bucket1 = 0, bucket2 = 0;
+        for (int num: nums) {
+            if ((num & rightmostSetBit) > 0) {
+                bucket1 ^= num;
+            } else {
+                bucket2 ^= num;
+            }
+        }
+        return new int[] {bucket1, bucket2};
     }
 }
