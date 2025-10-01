@@ -1,4 +1,4 @@
-/* PROBLEM DESCRIPTION
+''' PROBLEM DESCRIPTION
 
 There are numBottles water bottles that are initially full of water. You can exchange numExchange empty water bottles from the market with one full water bottle.
 
@@ -29,9 +29,8 @@ Constraints:
 1 <= numBottles <= 100
 2 <= numExchange <= 100
 
-*/
 
-//Solution
+//JAVA Solution
 
 class Solution {
     public int numWaterBottles(int numBottles, int numExchange) {
@@ -43,3 +42,15 @@ class Solution {
         return sum;
     }
 }
+
+'''
+
+#Python Solution
+
+class Solution:
+    def numWaterBottles(self, numBottles: int, numExchange: int) -> int:
+        temp, total = numBottles, numBottles
+        while temp >= numExchange:
+            total += (temp // numExchange)
+            temp = (temp // numExchange) + (temp % numExchange)
+        return total
