@@ -1,4 +1,4 @@
-/* PROBLEM DESCRIPTION
+''' PROBLEM DESCRIPTION
 
 You are given an array of integers nums and the head of a linked list. Return the head of the modified linked list after removing all nodes from the linked list that have a value that exists in nums.
 
@@ -88,3 +88,27 @@ class Solution {
         return head;
     }
 }
+'''
+
+#Solution
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
+        temp = head
+        prev = None
+        nums_set = set(nums)
+        while temp != None:
+            if temp.val in nums_set:
+                if prev != None:
+                    prev.next = temp.next
+                else:
+                    head = temp.next
+            else:
+                prev = temp    
+            temp = temp.next
+        return head
